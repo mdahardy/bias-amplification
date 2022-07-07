@@ -22,7 +22,7 @@ $ pip install -r requirements.txt
 $ dallinger debug --verbose
 ```
 
-Note that installing Dallinger can be buggy and there are often version conficts between required packages. More documentation on Dallinger is given on their [website](https://dallinger.readthedocs.io/en/latest).
+Note that installing Dallinger can be buggy and there are often version conficts between required packages. More documentation is given on their [website](https://dallinger.readthedocs.io/en/latest).
 
 ## Data
 
@@ -37,18 +37,19 @@ Data for each of the 100 simulations of Experiment 2 used for the power analysis
 
 In the analyses/ directory, running `$ make results` will generate all the statistics and plots used in the paper. Statistics reported in the paper are computed are stored in analyses/stats/ as TeX files, and plots are stored in analyses/plots/.
 
-* Analyses:
-    * Experiment 1 main analyses: [e1_main_analyses.r](analyses/experiment_1/e1_main_analyses.R)
-    * Experiment 1 exploratory analyses: [e1_exploratory_analyses.r](analyses/experiment_1/e1_exploratory_analyses.R)
-    * Experiment 1 IRT model: [bias_irt_model.r](analyses/experiment_1/bias_irt_model.R)
-    * Experiments 1 and 2 perceptual priming exploratory analyses: [perceptual_priming.r](analyses/experiment_2/perceptual_priming.R)
-    * Experiment 2 power analysis: [run_power_analysis.r](analyses/power_analysis/run_power_analysis.R)
-    * Experiment 2 main analyses: [e2_main_analyses.r](analyses/experiment_2/e2_main_analyses.R)
-    * Experiment 2 exploratory analyses: [e2_exploratory_analyses.r](analyses/experiment_2/e2_exploratory_analyses.R)
-* Plots:
-    * Experiment 1 plots: [e1_plots.r](analyses/experiment_1/e1_plots.R)
-    * Experiment 2 plots: [e2_plots.r](analyses/experiment_2/e2_plots.R)
-    * Power analysis plots: [power_analysis_plots.r](analyses/power_analysis/power_analysis_plots.R)
+### Statistical analyses:
+* Experiment 1 main analyses: [e1_main_analyses.r](analyses/experiment_1/e1_main_analyses.R)
+* Experiment 1 exploratory analyses: [e1_exploratory_analyses.r](analyses/experiment_1/e1_exploratory_analyses.R)
+* Experiment 1 IRT model: [bias_irt_model.r](analyses/experiment_1/bias_irt_model.R)
+* Experiments 1 and 2 perceptual priming exploratory analyses: [perceptual_priming.r](analyses/experiment_2/perceptual_priming.R)
+* Experiment 2 power analysis: [run_power_analysis.r](analyses/power_analysis/run_power_analysis.R)
+* Experiment 2 main analyses: [e2_main_analyses.r](analyses/experiment_2/e2_main_analyses.R)
+* Experiment 2 exploratory analyses: [e2_exploratory_analyses.r](analyses/experiment_2/e2_exploratory_analyses.R)
+
+### Plots:
+* Experiment 1 plots: [e1_plots.r](analyses/experiment_1/e1_plots.R)
+* Experiment 2 plots: [e2_plots.r](analyses/experiment_2/e2_plots.R)
+* Power analysis plots: [power_analysis_plots.r](analyses/power_analysis/power_analysis_plots.R)
 
 Note that the Makefile will not generate the Bayesian model figure. To generate this figure, run the [make_model_plot.m](analyses/bayesian_model/make_model_plot.m) MATLAB script.
 
