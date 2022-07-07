@@ -37,7 +37,7 @@ Data for each of the 100 simulations of Experiment 2 used for the power analysis
 
 In the analyses/ directory, running `$ make results` will generate all the statistics and plots used in the paper. Statistics reported in the paper are computed are stored in analyses/stats/ as TeX files, and plots are stored in analyses/plots/.
 
-### Statistical analyses:
+### Statistical analyses
 * Experiment 1 main analyses: [e1_main_analyses.r](analyses/experiment_1/e1_main_analyses.R)
 * Experiment 1 exploratory analyses: [e1_exploratory_analyses.r](analyses/experiment_1/e1_exploratory_analyses.R)
 * Experiment 1 IRT model: [bias_irt_model.r](analyses/experiment_1/bias_irt_model.R)
@@ -46,7 +46,7 @@ In the analyses/ directory, running `$ make results` will generate all the stati
 * Experiment 2 main analyses: [e2_main_analyses.r](analyses/experiment_2/e2_main_analyses.R)
 * Experiment 2 exploratory analyses: [e2_exploratory_analyses.r](analyses/experiment_2/e2_exploratory_analyses.R)
 
-### Plots:
+### Plots
 * Experiment 1 plots: [e1_plots.r](analyses/experiment_1/e1_plots.R)
 * Experiment 2 plots: [e2_plots.r](analyses/experiment_2/e2_plots.R)
 * Power analysis plots: [power_analysis_plots.r](analyses/power_analysis/power_analysis_plots.R)
