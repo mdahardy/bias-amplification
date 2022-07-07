@@ -22,7 +22,7 @@ $ pip install -r requirements.txt
 $ dallinger debug --verbose
 ```
 
-Note that installing Dallinger can be buggy and there are often version conficts between required packages. More documentation is given on their [website](https://dallinger.readthedocs.io/en/latest).
+You may want to reduce the sample sizes in the relevant `experiment.py` file (e.g., reducing `generation_size` and `planned_overflow`) as each recruitment request will open a new browser window when debugging. Also note that installing Dallinger can be buggy and there are often version conficts between required packages.  More documentation is given on their [website](https://dallinger.readthedocs.io/en/latest).
 
 ## Data
 
@@ -55,4 +55,4 @@ Note that the Makefile will not generate the Bayesian model figure. To generate 
 
 ## Experiment simulation
 
-To simulate the experiment (used for the Experiment 2 power analysis), navigate to the simulation/ directory and run `$ Rscript simulate_experiment.R <simulation_id> <output_directory>`. `simulation_id` is an integer that serves as a unique identifier for the simulation. `output_directory` is a string representing the directory where the data from the simulation should be stored, e.g. `$ Rscript simulate_experiment.R 0 test_directory`. Data from the 100 runs of this script we used for the power analysis is in the data/analyses/ directory. Note that by default, the simulation uses the cached oracle models in the simulation/fitted_oracles/ directory to simulate participant behavior.
+To simulate the experiment (used for the Experiment 2 power analysis), navigate to the simulation/ directory and run `$ Rscript simulate_experiment.R <simulation_id> <output_directory>`. `simulation_id` is an integer that serves as a unique identifier for the simulation. `output_directory` is a string representing the directory where the data from the simulation should be stored, e.g. `$ Rscript simulate_experiment.R 0 test_directory`. Data from the 100 simulations we used for the power analysis is in the data/analyses/ directory. Note that by default, the simulation uses the cached oracle models in the simulation/fitted_oracles/ directory to simulate participant behavior.
