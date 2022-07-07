@@ -1,4 +1,4 @@
-# Social bias amplification
+# Bias amplification in social networks
 
 Pre-registrations, experiment demos, data, analyses, and simulations for <b>Experimental evidence for bias amplification in social networks and a mitigation framework</b> by [Matt Hardy](https://matthardy.org/), [Bill Thompson](https://billdthompson.github.io/), [Peaks Krafft](https://www.arts.ac.uk/creative-computing-institute/people/peaks-krafft), and [Tom Griffiths](https://cocosci.princeton.edu).
 
