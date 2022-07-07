@@ -35,9 +35,9 @@ Data for each of the 100 simulations of Experiment 2 used for the power analysis
 
 ## Analyses
 
-In the analyses/ directory, running `$ make results` will generate all the statistics and plots used in the paper. Statistics are saved in analyses/stats/ as TeX files, and plots in analyses/plots/.
+In the analyses/ directory, running `$ make results` will generate all the statistics and plots used in the paper by running the scripts below. Statistics are saved in analyses/stats/ as TeX files, and plots in analyses/plots/.
 
-### Statistical analyses
+### Analysis scripts
 * Experiment 1 main analyses: [e1_main_analyses.r](analyses/experiment_1/e1_main_analyses.R)
 * Experiment 1 exploratory analyses: [e1_exploratory_analyses.r](analyses/experiment_1/e1_exploratory_analyses.R)
 * Experiment 1 IRT model: [bias_irt_model.r](analyses/experiment_1/bias_irt_model.R)
@@ -46,7 +46,7 @@ In the analyses/ directory, running `$ make results` will generate all the stati
 * Experiment 2 main analyses: [e2_main_analyses.r](analyses/experiment_2/e2_main_analyses.R)
 * Experiment 2 exploratory analyses: [e2_exploratory_analyses.r](analyses/experiment_2/e2_exploratory_analyses.R)
 
-### Plots
+### Plot scripts
 * Experiment 1 plots: [e1_plots.r](analyses/experiment_1/e1_plots.R)
 * Experiment 2 plots: [e2_plots.r](analyses/experiment_2/e2_plots.R)
 * Power analysis plots: [power_analysis_plots.r](analyses/power_analysis/power_analysis_plots.R)
@@ -55,4 +55,4 @@ Note that the Makefile will not generate the Bayesian model figure. To generate 
 
 ## Experiment simulation
 
-To simulate the experiment (used for the Experiment 2 power analysis), navigate to the simulation/ directory and run `$ Rscript simulate_experiment.R <simulation_id> <output_directory>`. `simulation_id` is an integer that serves as a unique identifier for the simulation. `output_directory` is a string representing the directory where the data from the simulation should be stored, e.g. `$ Rscript simulate_experiment.R 0 test_directory`. Data from the 100 simulations we used for the power analysis is in the data/analyses/ directory. Note that by default, the simulation uses the cached oracle models in the simulation/fitted_oracles/ directory to simulate participant behavior.
+To simulate Experiment 2 (including the resampling algorithm), navigate to the simulation/ directory and run `$ Rscript simulate_experiment.R <simulation_id> <output_directory>`. `simulation_id` is an integer that serves as a unique identifier for the simulation. `output_directory` is a string representing the directory where the data from the simulation should be stored, e.g. `$ Rscript simulate_experiment.R 0 test_directory`. Data from the 100 simulations we used for the power analysis is in the data/analyses/ directory. Note that by default, the simulation uses the cached oracle models in the simulation/fitted_oracles/ directory to simulate participant behavior.
