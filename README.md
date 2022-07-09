@@ -28,7 +28,7 @@ You may want to reduce the sample sizes in the relevant `experiment.py` file (e.
 
 Data from both experiments can be found in the data/ directory:
 
-* Experiment 1: [Experiment 1.csv](data/experiment_1.csv)
+* Experiment 1: [experiment 1.csv](data/experiment_1.csv)
 * Experiment 2: [experiment_2.csv](data/experiment_2.csv)
 
 Data for each of the 100 simulations of Experiment 2 used for the power analysis can be found in the data/simulated_data/ directory.

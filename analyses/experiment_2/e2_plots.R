@@ -243,6 +243,54 @@ participant_observations = participant_level_data %>%
 paste0(plots_directory,'participant_observations.pdf') %>%
   ggsave(participant_observations,width=25,height=15,units=plots_units)
 
+
+### --- --- --- --- --- --- --- --- --- ### 
+### --- OG and resampled bias by network: scatter plot --- ###
+### --- --- --- --- --- --- --- --- --- ### 
+
+bias_by_generation_and_network = scatter_data %>%
+  mutate(
+    condition = ifelse(as.integer(substr(generation_network,0,1))==1,'Asocial motivated','Social resampling'),
+    condition_replication = substr(network_identifier.x,14,14)
+  ) %>%
+  arrange(desc(row_number())) %>% 
+  ggplot(aes(x=original_bias,y=resampled_bias,fill=condition)) + 
+  #geom_segment(aes(x=0.23,xend=0.65,y=0.23,yend=0.65),linetype='dashed',size=1.25)+
+  geom_abline(slope=1,linetype='dashed',size=1.25)+
+  geom_errorbarh(aes(xmax=original_bias+original_bias_se,
+                     xmin=original_bias-original_bias_se,
+                     height=0.025),
+                 size=1.75,
+                 color='#6e6e6e')+
+  geom_errorbar(aes(ymax=resampled_bias+resampled_bias_se,
+                    ymin=resampled_bias-resampled_bias_se),
+                width=0.025,
+                size=1.75,
+                color='#6e6e6e') +
+  geom_point(shape=21,color='#6e6e6e',size=10,stroke=2) +
+  scale_fill_manual(name='Condition',
+                    values = c(condition_colors['Asocial bias'],condition_colors['Social resampling'])) +
+  facet_wrap(~ randomization_color.x,scales='free',nrow=1) +
+  #facet_grid(rows=vars(randomization_color.x),cols=vars(condition_replication),scales='free')+
+  # scale_x_continuous(limits=c(0.23,0.65),expand=c(0,0))+
+  # scale_y_continuous(limits=c(0.23,0.65),expand=c(0,0))+
+  theme_styling() +
+  labs(x='Bias of original choices',y='Bias of resampled choices')+
+  theme(
+    strip.text = element_blank(),
+    panel.grid.major = element_line(colour = "#ededed"),
+    panel.spacing = unit(3.5, "lines"),
+    axis.line=element_blank(),
+    axis.text = element_text(color='black',size=38),
+    axis.title = element_text(size=42),
+    #axis.ticks = element_line(colour = "black"),
+    axis.ticks = element_blank(),
+    legend.position='none'
+  )
+
+bias_by_generation_and_network
+
+
 ### --- --- --- --- --- --- --- --- ### 
 ### --- --- --- --- --- --- --- --- ### 
 # Exploratory plots below
@@ -442,35 +490,75 @@ paste0(plots_directory,'bias_by_generation_and_network.pdf') %>%
 ### --- Scatter plot: participant biases and how often their were transmitted  --- ###
 ### --- --- --- --- --- --- --- --- ###
 
-# THIS IS THE RELEVANT PLOT
+# Get impressions
+# group by participant
 
 participant_bias_plot = e2_data %>%
   subset(is_cloned==F) %>%
-  mutate(
-    condition = ifelse(first_genration==1,'Asocial motivated','Social resampling'),
-    condition_replication = substr(condition_replication,1,1)
-  ) %>%
-  arrange(first_genration) %>% 
-  ggplot(aes(x=decision_origin_id_bias,y=impressions,fill=condition)) +
-  geom_hline(yintercept=128,linetype='dashed',size=1.25) +
-  geom_vline(xintercept=0,linetype='dashed',size=1.25) +
-  geom_point(shape=21,color='#6e6e6e',size=5,stroke=0,alpha=0.6) +
+  subset(impressions>0) %>%
+  group_by(participant_id) %>%
+  summarize(
+    bias = unique(estimated_bias),
+    impressions = unique(impressions),
+    condition = unique(condition),
+    randomization_color = unique(randomization_color)
+  ) %>% 
+  ggplot(aes(x=bias,y=impressions,fill=randomization_color)) +
+  geom_hline(yintercept=128,linetype='dashed') +
+  geom_vline(xintercept=0,linetype='dashed') +
+  geom_point(shape=21,color='#5e5e5e',size=4,alpha=0.6) +
   scale_y_continuous(breaks=c(60,90,120,150))+
-  scale_fill_manual(name='Condition', 
-                  values = c(condition_colors['Asocial motivated'],condition_colors['Social resampling'])) +
+  scale_fill_manual(name='Bias color', labels=c('Blue','Green'), 
+                    values = plot_colors$blue_green_colors)+
+  labs(y='Number of choices transmitted',x='Estimated green bias') +
   theme_styling() +
-  labs(y='Number of choices transmitted',x='Bias towards green') +
   theme(
-    strip.text = element_blank(),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
     panel.grid.major = element_line(colour = "#ededed"),
-    panel.spacing = unit(3.5, "lines"),
-    axis.line=element_blank(),
-    axis.text = element_text(color='black',size=38),
-    axis.title = element_text(size=42),
     axis.ticks = element_blank(),
     legend.position='none'
   )
 
+bias_densities = e2_data %>%
+  subset(is_cloned==F) %>%
+  subset(impressions>0) %>%
+  group_by(participant_id) %>%
+  summarize(
+    bias = unique(estimated_bias),
+    randomization_color = unique(randomization_color)
+  ) %>% 
+  ggplot(aes(x = bias, fill = randomization_color)) + 
+  geom_density(alpha = 0.6,color='#5e5e5e',) + 
+  scale_fill_manual(name='Bias color', labels=c('Blue','Green'), 
+                    values = plot_colors$blue_green_colors)+
+  theme_void() + 
+  theme(legend.position = "none")
+
+bias_densities
+
+impression_densities = e2_data %>%
+  subset(is_cloned==F) %>%
+  subset(impressions>0) %>%
+  group_by(participant_id) %>%
+  summarize(
+    impressions = unique(impressions),
+    randomization_color = unique(randomization_color)
+  ) %>% 
+  ggplot(aes(x = impressions, fill = randomization_color)) + 
+  geom_density(alpha = 0.6,color='#5e5e5e',) + 
+  scale_fill_manual(name='Bias color', labels=c('Blue','Green'), 
+                    values = plot_colors$blue_green_colors)+
+  theme_void() + 
+  theme(legend.position = "none") +
+  coord_flip()
+
+impression_densities
+
+final_participant_plot = bias_densities + plot_spacer() + participant_bias_plot + impression_densities + 
+  plot_layout(ncol = 2, nrow = 2, widths = c(4, 1), heights = c(1, 4))
+
+
 # Save
 paste0(plots_directory,'participant_biases.pdf') %>%
-  ggsave(participant_bias_plot,width=100,height=25,units=plots_units)
+  ggsave(participant_bias_plot,width=15,height=15,units=plots_units)

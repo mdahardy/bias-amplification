@@ -59,6 +59,7 @@ load_e2_data = function(include_cloned = F){
         node_table_id,
         front_end_node_id,
         estimated_bias = decision_origin_id_bias,
+        impressions,
         green_shown = green_first == 'True',
         condition_replication = paste0(condition_replication,randomization_color),
         network_identifier = paste0(condition,condition_replication),
