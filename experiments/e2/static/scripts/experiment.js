@@ -285,15 +285,6 @@
     true_color = correctStr();
     [accuracy_b,condition_b,dotStr] = getBonusAmount(true_color,choice);
 
-    // Participant failed very easy problem, kick them out
-    if (is_practice && Math.abs(proportion_green - 0.5) >= 0.4 && accuracy_b === 0){
-        $('.main_div').css('display','none');
-        spinner = dallinger.BusyForm()
-        spinner.freeze([])
-        dallinger.allowExit();
-        dallinger.goToPage('questionnaire');
-    }
-
     if (trial>=num_practice_trials){
       num_test_correct += (accuracy_b/50);
       total_dots += (condition_b / dot_bonus);
@@ -353,15 +344,6 @@
       contents: JSON.stringify(contents),
       info_type: 'decision'
     })
-    .fail(function (rejection) {
-        // A 403 is our signal that it's time to go to the questionnaire
-        if (rejection.status === 403) {
-            dallinger.allowExit();
-            dallinger.goToPage('questionnaire');
-          } else {
-            dallinger.error(rejection);
-          }
-      }); 
   };
 
 
@@ -612,15 +594,6 @@
       .done(function (resp) {
         dallinger.submitAssignment();
       })
-      .fail(function (rejection) {
-        // A 403 is our signal that it's time to go to the questionnaire
-        if (rejection.status === 403) {
-            dallinger.allowExit();
-            dallinger.goToPage('questionnaire');
-          } else {
-            dallinger.error(rejection);
-          }
-      }); 
     });
   }
 

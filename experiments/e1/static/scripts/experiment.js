@@ -424,15 +424,6 @@ create_agent = function() {
         // console.log("** Inside get net -- net decision_index: ", net_decision_index)
         get_social_info();
       })
-      .fail(function (rejection) {
-        // A 403 is our signal that it's time to go to the questionnaire
-        if (rejection.status === 403) {
-            dallinger.allowExit();
-            dallinger.goToPage('questionnaire');
-          } else {
-            dallinger.error(rejection);
-          }
-      }); 
     }) 
     } else {
       display_test_info()
@@ -470,16 +461,6 @@ get_received_infos = function() {
       
     }
   })
-
-  .fail(function (rejection) {
-      // A 403 is our signal that it's time to go to the questionnaire
-      if (rejection.status === 403) {
-          dallinger.allowExit();
-          dallinger.goToPage('questionnaire');
-        } else {
-          dallinger.error(rejection);
-        }
-  }); 
 };
 
 function presentDisplay () {
@@ -727,15 +708,6 @@ report = function (color) {
       $("#instructions").hide()
       updateResponseHTML(true_color,color,dotStr,accuracy_b,condition_b)
   })
-  .fail(function (rejection) {
-      // A 403 is our signal that it's time to go to the questionnaire
-      if (rejection.status === 403) {
-          dallinger.allowExit();
-          dallinger.goToPage('questionnaire');
-        } else {
-          dallinger.error(rejection);
-        }
-    }); 
 };
 
 $(document).ready(function() {
@@ -819,17 +791,7 @@ function getBonusAmount(truth,response){
           }
           get_received_infos();
         })
-        .fail(function (rejection) {
-          // A 403 is our signal that it's time to go to the questionnaire
-          if (rejection.status === 403) {
-              dallinger.allowExit();
-              dallinger.goToPage('questionnaire');
-            } else {
-              dallinger.error(rejection);
-            }
-        }); 
   }  
-
 
 
 function updateResponseHTML(truth,response,dotStr,accuracy_bonus,condition_bonus){
@@ -1094,15 +1056,6 @@ function display_test_info(){
                 // console.log("** Inside get net -- net decision_index: ", net_decision_index)
                 get_social_info();
               })
-              .fail(function (rejection) {
-                // A 403 is our signal that it's time to go to the questionnaire
-                if (rejection.status === 403) {
-                    dallinger.allowExit();
-                    dallinger.goToPage('questionnaire');
-                  } else {
-                    dallinger.error(rejection);
-                  }
-              }); 
     }) 
       });
 }
